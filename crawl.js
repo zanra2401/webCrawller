@@ -38,7 +38,6 @@ function getUrlFromHTML(htmlBody, baseUrl){
 
 async function crawlPage(baseUrl, currentUrl, pages){
 	
-
 	const baseURLObj = new URL(baseUrl)
 	const currentURLObj = new URL(currentUrl)
 
@@ -63,7 +62,7 @@ async function crawlPage(baseUrl, currentUrl, pages){
 			console.log(`error in fetch with status code: ${resp.status} on page : ${currentUrl}`)
 			return pages
 		}
-		const contentType = resp.headers.get("content-type")
+		let contentType = resp.headers.get('content-Type')
 		if(!contentType.includes("text/html")){
 			console.log('non html response')
 			return pages
@@ -76,6 +75,7 @@ async function crawlPage(baseUrl, currentUrl, pages){
 		for (const nextUrl of nextURls){
 			pages = await crawlPage(baseUrl, nextUrl, pages)
 		}
+		console.log(htmlBody)
 
 	}catch(err){
 		console.log(`error in fetch ${err.message} on page ${currentUrl}`)
