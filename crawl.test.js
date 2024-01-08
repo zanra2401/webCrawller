@@ -1,4 +1,4 @@
-const { normalizeURL } = require('./crawl.js')
+const { normalizeURL, getUrlFromHTML } = require('./crawl.js')
 const { test, expect } = require('@jest/globals')
 
 
@@ -22,3 +22,25 @@ test('normalizeURL', () => {
 	const expected = 'zanuar/rikza'
 	expect(actual).toEqual(expected)
 })
+test('normalizeURL', () => {
+	const inputHTMLBody = `
+	<html>
+		<head>
+		</head>
+		<body>
+			<a href="inva">
+				inva
+			</a>
+		</body>
+	</html>
+	`
+	const inputBaseUrl = "https://zanuar"
+	const actual = getUrlFromHTML(inputHTMLBody, inputBaseUrl)
+	const expected = []
+	expect(actual).toEqual(expected
+	)
+})
+
+
+
+
